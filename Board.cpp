@@ -15,7 +15,13 @@ void ariel::Board::post(unsigned int row, unsigned int column,Direction d,const 
     unsigned int board_len = board.size();
     unsigned int post_len = s.size();
     if(d == Direction::Horizontal){
-
+        
+        /*
+        if the length of the board is smaller or equal to the specified
+        row, then we want to add more rows in order to add the string at the exact row.
+        Here, the length of the row will be according to the first row of the board,
+        the next if statement checks wheter the row has enough columns.
+        */
          if (board_len <= row) {
             for (size_t i = 0; i < row+1; i++)
             {
@@ -23,6 +29,10 @@ void ariel::Board::post(unsigned int row, unsigned int column,Direction d,const 
             }
             
         }
+        /*
+        checking if at the specified column, there are enough columns to insert the post.
+        if not, then resize the board.
+        */
         unsigned int range = column+post_len;
         if(length_col < range){
             for(size_t i=0; i<board.size(); i++){
@@ -61,7 +71,7 @@ void ariel::Board::post(unsigned int row, unsigned int column,Direction d,const 
 
 string ariel::Board::read(unsigned int row, unsigned int column,Direction d,unsigned int length){
 
-    string ans = "";
+    string ans;
     unsigned int length_col = board.at(0).size();
     unsigned int board_len = board.size();
     if(d == Direction::Horizontal){
